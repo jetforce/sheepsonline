@@ -38,19 +38,19 @@ public class GUI extends javax.swing.JFrame {
             public void keyPressed(KeyEvent e) {
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_UP:
-                        System.out.println("UP");
+                        //System.out.println("UP");
                         Protocol.send("-1,0");
                         break;
                     case KeyEvent.VK_DOWN:
-                        System.out.println("DOWN");
+                        //System.out.println("DOWN");
                         Protocol.send("1,0");
                         break;
                     case KeyEvent.VK_RIGHT:
-                        System.out.println("RIGHT");
+                        //System.out.println("RIGHT");
                         Protocol.send("0,1");
                         break;
                     case KeyEvent.VK_LEFT:
-                        System.out.println("LEFT");
+                        //System.out.println("LEFT");
                         Protocol.send("0,-1");
                         break;
                 }
