@@ -70,4 +70,7 @@ public class Protocol extends Thread {
         
     }
     
+    public void send(String line){
+        this.pw.println(line);
+    }
 }
