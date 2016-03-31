@@ -12,8 +12,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Sheep;
+import gui.GUI;
 
 /**
  *
@@ -27,20 +30,34 @@ public class Protocol extends Thread {
     private PrintWriter pw;
     private BufferedReader reader;
     private boolean life = true;
+    private String id;
+    private GUI ui;
     
-    public Protocol() throws IOException{
+    public Protocol(GUI ui) throws IOException{
         this.soc = new Socket(address,port);
         this.pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(soc.getOutputStream())), true);
-        this.reader = new BufferedReader(new InputStreamReader(soc.getInputStream()));    
+        this.reader = new BufferedReader(new InputStreamReader(soc.getInputStream()));
+        this.ui = ui;
+        String line = this.reader.readLine();
+        String[] list;
+        list = line.split(",");
+        this.id = list[0];
+        
     }
    
     public void run(){
         String line = "";
+        ArrayList<Sheep> sheeps = new ArrayList<>();
+        String list[];
+        int id;
+        
         try {
             while((line= this.reader.readLine()) != null){
-                
+                list = line.split(",");
+                sheeps.add(new Sheep(Integer.parseInt(list[1]),Integer.parseInt(list[2]),Integer.parseInt(list[0])));
                 if(line.isEmpty()){
-                    //arren update UI here.
+                    this.ui.update(sheeps);
+                    sheeps = new ArrayList<>();//arren update UI here.
                 }
                 
             }
