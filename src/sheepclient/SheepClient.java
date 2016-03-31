@@ -36,8 +36,8 @@ public class SheepClient {
             Logger.getLogger(SheepClient.class.getName()).log(Level.SEVERE, null, ex);
         }*/
         
-        Protocol.getInstance().start();
-        
+        //Protocol.getInstance().start();
+        new Spawner(3);
     }    
     
 }
