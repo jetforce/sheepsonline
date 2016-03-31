@@ -53,6 +53,7 @@ public class Protocol extends Thread {
         
         try {
             while((line= this.reader.readLine()) != null){
+                System.out.println(line);
                 list = line.split(",");
                 sheeps.add(new Sheep(Integer.parseInt(list[1]),Integer.parseInt(list[2]),Integer.parseInt(list[0])));
                 if(line.isEmpty()){

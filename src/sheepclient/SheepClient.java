@@ -5,12 +5,14 @@
  */
 package sheepclient;
 
+import gui.GUI;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import protocol.Protocol;
 
 /**
  *
@@ -25,33 +27,11 @@ public class SheepClient {
         
  
         try {
-            Socket soc = new Socket("localhost",1108);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(soc.getInputStream()));
-            String line;
+            GUI ui = new GUI();
+            Protocol p = new Protocol(ui);
+            p.start();
             
-            String[] list;
-            new testonly(soc).start();
-            line = reader.readLine();
-            System.out.println(line);
-            try {
-                while((line= reader.readLine()) != null){
-                    /*
-                    list = line.split(",");
-                    for(String i: list){
-                        System.out.print(i+" ,");
-                    }
-                    System.out.println();
-                    //updateseep
-                            */
-                }            
-            } catch (IOException ex) {
-                Logger.getLogger(SheepClient.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
-        
-        
-        
-    }   catch (IOException ex) {
+        }catch (IOException ex) {
             Logger.getLogger(SheepClient.class.getName()).log(Level.SEVERE, null, ex);
         }
         
