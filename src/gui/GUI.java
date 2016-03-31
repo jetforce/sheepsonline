@@ -33,7 +33,7 @@ public class GUI extends javax.swing.JFrame {
         panelMain = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Sheeps");
+        setTitle("Sheep Client");
         setBounds(new java.awt.Rectangle(0, 0, 600, 500));
 
         panelMain.setLayout(new java.awt.GridLayout(30, 30));
