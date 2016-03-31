@@ -1,10 +1,13 @@
 
 package gui;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import static javax.swing.SwingConstants.CENTER;
 import model.Sheep;
+import protocol.Protocol;
 
 public class GUI extends javax.swing.JFrame {
     
@@ -24,6 +27,40 @@ public class GUI extends javax.swing.JFrame {
                 panelMain.add(grid[i][j]);
             }
         }
+        
+        this.addKeyListener(new KeyListener() {
+
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_UP:
+                        System.out.println("UP");
+                        Protocol.send("-1,0");
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        System.out.println("DOWN");
+                        Protocol.send("1,0");
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        System.out.println("RIGHT");
+                        Protocol.send("0,1");
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        System.out.println("LEFT");
+                        Protocol.send("0,-1");
+                        break;
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+
+        });
     }
 
     @SuppressWarnings("unchecked")

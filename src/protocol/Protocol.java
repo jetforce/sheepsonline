@@ -24,20 +24,22 @@ import gui.GUI;
  */
 public class Protocol extends Thread {
     
+    private static Protocol protocol = null;
     private Socket soc;
     private final int port =1108;
     private final String address ="localhost";
-    private PrintWriter pw;
+    private static PrintWriter pw;
     private BufferedReader reader;
     private boolean life = true;
     private String id;
     private GUI ui;
     
-    public Protocol(GUI ui) throws IOException{
+    private Protocol(GUI ui) throws IOException{
         this.soc = new Socket(address,port);
         this.pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(soc.getOutputStream())), true);
         this.reader = new BufferedReader(new InputStreamReader(soc.getInputStream()));
         this.ui = ui;
+        this.ui.setVisible(true);
         String line = this.reader.readLine();
         String[] list;
         list = line.split(",");
@@ -45,6 +47,17 @@ public class Protocol extends Thread {
         
     }
    
+    public static Protocol getInstance(){
+        if(protocol == null){
+            try {
+                protocol = new Protocol(new GUI());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return protocol;
+    }
+    
     public void run(){
         String line = "";
         ArrayList<Sheep> sheeps = new ArrayList<>();
@@ -70,7 +83,7 @@ public class Protocol extends Thread {
         
     }
     
-    public void send(String line){
-        this.pw.println(line);
+    public static void send(String line){
+        Protocol.pw.println(line);
     }
 }

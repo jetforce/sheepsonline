@@ -26,7 +26,7 @@ public class SheepClient {
     public static void main(String[] args){
         
  
-        try {
+        /*try {
             GUI ui = new GUI();
             ui.setVisible(true);
             Protocol p = new Protocol(ui);
@@ -34,7 +34,9 @@ public class SheepClient {
             
         }catch (IOException ex) {
             Logger.getLogger(SheepClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
+        
+        Protocol.getInstance().start();
         
     }    
     
