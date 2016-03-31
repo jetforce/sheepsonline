@@ -28,6 +28,7 @@ public class SheepClient {
  
         try {
             GUI ui = new GUI();
+            ui.setVisible(true);
             Protocol p = new Protocol(ui);
             p.start();
             
