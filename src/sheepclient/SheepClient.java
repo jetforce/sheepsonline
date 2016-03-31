@@ -28,8 +28,11 @@ public class SheepClient {
             Socket soc = new Socket("localhost",1108);
             BufferedReader reader = new BufferedReader(new InputStreamReader(soc.getInputStream()));
             String line;
+            
             String[] list;
             new testonly(soc).start();
+            line = reader.readLine();
+            System.out.println(line);
             try {
                 while((line= reader.readLine()) != null){
                     /*
