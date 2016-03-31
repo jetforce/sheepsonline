@@ -41,6 +41,11 @@ public class testonly extends Thread {
         while (true) {
             line = generateMove();//sc.nextLine();
             pw.println(line);
+            try {
+                sleep(500);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(testonly.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -48,7 +53,7 @@ public class testonly extends Thread {
         String move = "";
         Random rand = new Random();
 
-        int num = rand.nextInt(5 - 1) + 1;
+        int num = rand.nextInt(5) + 1;
 
         switch (num) {
             case 1:
@@ -67,7 +72,7 @@ public class testonly extends Thread {
                 move = "0,-1";
                 break;
         }
-        System.out.println(move);
+        //System.out.println(move);
         return move;
     }
 }

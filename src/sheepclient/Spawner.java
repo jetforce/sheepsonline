@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author Arces
  */
-public class Spawner {
+public class Spawner extends Thread{
 
     private int nClients;
     private Socket soc;
@@ -24,10 +24,13 @@ public class Spawner {
     private ArrayList<testonly> tList;
 
     public Spawner(int nClients) {
+        this.nClients = nClients;
+    }
+    
+    public void run(){
         tList = new ArrayList<>();
         try {
             for (int i = 0; i < nClients; i++) {
-                System.out.println("helloooo");
                 soc = new Socket(address, port);
                 testonly t = new testonly(soc);
                 t.start();
