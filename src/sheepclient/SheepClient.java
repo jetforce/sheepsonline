@@ -29,17 +29,17 @@ public class SheepClient {
             BufferedReader reader = new BufferedReader(new InputStreamReader(soc.getInputStream()));
             String line;
             String[] list;
-            
+            new testonly(soc).start();
             try {
                 while((line= reader.readLine()) != null){
-
+                    /*
                     list = line.split(",");
                     for(String i: list){
                         System.out.print(i+" ,");
                     }
                     System.out.println();
                     //updateseep
-
+                            */
                 }            
             } catch (IOException ex) {
                 Logger.getLogger(SheepClient.class.getName()).log(Level.SEVERE, null, ex);
