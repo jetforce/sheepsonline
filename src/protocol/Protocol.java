@@ -34,6 +34,11 @@ public class Protocol extends Thread {
     private String id;
     private GUI ui;
     
+    
+    private static String curx;
+    private static String cury;
+    private static Timer time;
+    
     private Protocol(GUI ui) throws IOException{
         this.soc = new Socket(address,port);
         this.pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(soc.getOutputStream())), true);
@@ -44,6 +49,9 @@ public class Protocol extends Thread {
         String[] list;
         list = line.split(",");
         this.id = list[0];
+        this.curx = list[1];
+        this.cury = list[2];
+        Protocol.time = new Timer();
         
     }
    
@@ -73,7 +81,11 @@ public class Protocol extends Thread {
                     sheeps = new ArrayList<>();//arren update UI here.
                 }else{
                     list = line.split(",");
-                    sheeps.add(new Sheep(Integer.parseInt(list[1]),Integer.parseInt(list[2]),Integer.parseInt(list[0])));
+                    Protocol.curx = list[1];
+                    Protocol.cury = list[2];
+                    id = Integer.parseInt(list[0]);
+                    Protocol.time.endTime(list[1], list[2]);
+                    sheeps.add(new Sheep(Integer.parseInt(list[1]),Integer.parseInt(list[2]),id));
                 }
                 
             }
@@ -84,6 +96,7 @@ public class Protocol extends Thread {
     }
     
     public static void send(String line){
+        Protocol.time.startTime(Protocol.curx, Protocol.cury, 10);
         Protocol.pw.println(line);
     }
 }
