@@ -4,6 +4,7 @@ package gui;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import static javax.swing.SwingConstants.CENTER;
 import model.Sheep;
@@ -14,8 +15,8 @@ public class GUI extends javax.swing.JFrame {
     public GUI() {
         initComponents();
         
-        columns = 30;
-        rows = 30;
+        columns = 60;
+        rows = 60;
         grid = new JLabel[rows][columns];
         
         for(int i = 0; i < rows; i++){
@@ -72,6 +73,7 @@ public class GUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sheep Client");
         setBounds(new java.awt.Rectangle(0, 0, 600, 500));
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         panelMain.setLayout(new java.awt.GridLayout(30, 30));
 
