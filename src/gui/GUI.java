@@ -3,12 +3,16 @@ package gui;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import static javax.swing.SwingConstants.CENTER;
 import model.Sheep;
 import protocol.Protocol;
+import protocol.UDPProtocol;
 
 public class GUI extends javax.swing.JFrame {
     
@@ -39,20 +43,64 @@ public class GUI extends javax.swing.JFrame {
             public void keyPressed(KeyEvent e) {
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_UP:
+                {
+                    try {
                         //System.out.println("UP");
-                        Protocol.send("-1,0");
+                        
+                        // TCP
+                        //Protocol.send("-1,0");
+                        
+                        // UDP
+                        UDPProtocol.send(-1, 0);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
                         break;
                     case KeyEvent.VK_DOWN:
+                {
+                    try {
                         //System.out.println("DOWN");
-                        Protocol.send("1,0");
+                        
+                        // TCP
+                        //Protocol.send("1,0");
+                        
+                        // UDP
+                        UDPProtocol.send(1, 0);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
                         break;
                     case KeyEvent.VK_RIGHT:
+                {
+                    try {
                         //System.out.println("RIGHT");
-                        Protocol.send("0,1");
+                        
+                        // TCP
+                        //Protocol.send("0,1");
+                        
+                        // UDP
+                        UDPProtocol.send(0, 1);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
                         break;
                     case KeyEvent.VK_LEFT:
+                {
+                    try {
                         //System.out.println("LEFT");
-                        Protocol.send("0,-1");
+                        
+                        // TCP
+                        //Protocol.send("0,-1");
+                        
+                        // UDP
+                        UDPProtocol.send(0, -1);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
                         break;
                 }
             }

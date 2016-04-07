@@ -112,7 +112,7 @@ public class UDPProtocol extends Thread{
         }    
     }
     
-    private static void send(int x,int y) throws IOException{
+    public static void send(int x,int y) throws IOException{
         ByteBuffer bf = ByteBuffer.allocate(200);
         bf.putInt(UDPProtocol.my_id);
         bf.putInt(x);
