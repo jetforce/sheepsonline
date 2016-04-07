@@ -43,7 +43,7 @@ public class udptest extends Thread {
     public void run(){
        
             try{
-                socket.setSoTimeout(20000);
+                socket.setSoTimeout(10000);
                 socket.send(packet);
                 //System.out.println("Sent");
                 //receive ur stuff or u will never run.
@@ -53,7 +53,7 @@ public class udptest extends Thread {
                 ByteBuffer bf = ByteBuffer.wrap(initial);
                 my_id = bf.getInt();
                 
-               // System.out.println("U received "+my_id);
+                System.out.println("U received "+my_id);
             //Now listen to multicast port hehehe
             
              MulticastSocket Listen = new MulticastSocket(8889);
@@ -82,14 +82,14 @@ public class udptest extends Thread {
                         x = inReader.getInt();
                         y = inReader.getInt();
                         
-                        System.out.println(mil+" "+sheep_id + " " + x+" "+y);
+                        //System.out.println(mil+" "+sheep_id + " " + x+" "+y);
                     }
                    
                     inReader.clear();
                 
             }
             }catch(Exception e){
-                System.out.println("Error");
+                System.out.println("Error Waited a long time to connect unable to connect");
             }
 
         
@@ -117,8 +117,9 @@ public class udptest extends Thread {
         return move;
     }
     
-    public synchronized void send(int x,int y) throws IOException{
-        ByteBuffer bf = ByteBuffer.allocate(200);
+    public void send(int x,int y) throws IOException{
+        byte[] b = new byte[200];
+        ByteBuffer bf = ByteBuffer.wrap(b);
         bf.putLong(0);
         bf.putInt(my_id);
         bf.putInt(x);

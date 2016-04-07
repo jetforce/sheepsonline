@@ -28,15 +28,6 @@ public class SheepClient {
         
  
         try {
-            /*try {
-            GUI ui = new GUI();
-            ui.setVisible(true);
-            Protocol p = new Protocol(ui);
-            p.start();
-            
-            }catch (IOException ex) {
-            Logger.getLogger(SheepClient.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
             
             //tcp-ip
             //Protocol.getInstance().start();
@@ -44,8 +35,9 @@ public class SheepClient {
             //new Spawner(500).start();
             
             //udp
+            new UDPSpawner(50).start();
             UDPProtocol.getInstance().start();
-            new UDPSpawner(20).start();
+            
             //udptest up = new udptest();
             //up.start();
             
