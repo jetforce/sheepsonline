@@ -84,7 +84,7 @@ public class UDPProtocol extends Thread{
              InetAddress iaddress = InetAddress.getByName("224.2.2.3");
              Listen.joinGroup(iaddress);
              DatagramPacket inPacket;
-             byte[] inBuf = new byte[1024*5];
+             byte[] inBuf = new byte[1024*20];
              long lastmil=0, mil;
              int sheep_id,x,y;
              ByteBuffer inReader = ByteBuffer.wrap(inBuf); 
