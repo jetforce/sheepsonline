@@ -42,6 +42,7 @@ public class UDPProtocol extends Thread{
     private UDPProtocol(GUI ui) throws IOException{
         timer = new Timer();
         this.ui = ui;
+        this.ui.setVisible(true);
         UDPProtocol.socket = new DatagramSocket();
         byte[] buffer = new byte[1024*1];
         ByteBuffer bf = ByteBuffer.wrap(buffer);
@@ -121,6 +122,7 @@ public class UDPProtocol extends Thread{
     
     public static void send(int x,int y) throws IOException{
         ByteBuffer bf = ByteBuffer.allocate(200);
+        bf.putLong(0);
         bf.putInt(UDPProtocol.my_id);
         bf.putInt(x);
         bf.putInt(y);

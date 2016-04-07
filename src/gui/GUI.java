@@ -140,7 +140,6 @@ public class GUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void update(ArrayList<Sheep> sheeps){
-        
         for(int i = 0; i < rows * columns; i++){
             grid[i/rows][i%columns].setText("");
         }

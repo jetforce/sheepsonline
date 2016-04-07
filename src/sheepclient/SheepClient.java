@@ -13,6 +13,7 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import protocol.Protocol;
+import protocol.UDPProtocol;
 
 /**
  *
@@ -43,7 +44,8 @@ public class SheepClient {
             //new Spawner(500).start();
             
             //udp
-            new UDPSpawner(20).start();
+            UDPProtocol.getInstance().start();
+            //new UDPSpawner(20).start();
             //udptest up = new udptest();
             //up.start();
             
