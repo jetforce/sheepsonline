@@ -13,6 +13,7 @@ import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.Random;
 import model.Sheep;
 import protocol.UDPProtocol;
 
@@ -30,15 +31,13 @@ public class udptest extends Thread {
     private GUI ui;
     private static int my_id;
     
-    public udptest() throws IOException{
-        
-        socket = new DatagramSocket();
+    public udptest(DatagramSocket soc) throws IOException{
+        socket = soc;
         byte[] buffer = new byte[1024*1];
         ByteBuffer bf = ByteBuffer.wrap(buffer);
         bf.putLong(-1);
         InetAddress receiverAddress = InetAddress.getByName(address);
         this.packet = new DatagramPacket(buffer,buffer.length, receiverAddress, port);
-        
     }
     
     public void run(){
@@ -88,6 +87,33 @@ public class udptest extends Thread {
 
         
     
+    }
+    
+    public String generateMove() {
+        String move = "";
+        Random rand = new Random();
+
+        int num = rand.nextInt(5) + 1;
+
+        switch (num) {
+            case 1:
+                move = "0,0";
+                break;
+            case 2:
+                move = "0,1";
+                break;
+            case 3:
+                move = "1,0";
+                break;
+            case 4:
+                move = "-1,0";
+                break;
+            case 5:
+                move = "0,-1";
+                break;
+        }
+        //System.out.println(move);
+        return move;
     }
     
 }

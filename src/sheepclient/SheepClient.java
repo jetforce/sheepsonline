@@ -37,12 +37,17 @@ public class SheepClient {
             Logger.getLogger(SheepClient.class.getName()).log(Level.SEVERE, null, ex);
             }*/
             
+            //tcp-ip
             //Protocol.getInstance().start();
-            udptest up = new udptest();
-            up.start();
             //comment out protocol then uncomment this to spawn dummy sheeps
             //new Spawner(500).start();
-        } catch (IOException ex) {
+            
+            //udp
+            new UDPSpawner(20).start();
+            //udptest up = new udptest();
+            //up.start();
+            
+        } catch (Exception ex) {
             Logger.getLogger(SheepClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }    
