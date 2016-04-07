@@ -29,7 +29,7 @@ public class udptest extends Thread {
     private final String address = "localhost";
     private final int port = 1108;
     private GUI ui;
-    private static int my_id;
+    private int my_id;
     
     public udptest(DatagramSocket soc) throws IOException{
         socket = soc;
@@ -114,6 +114,16 @@ public class udptest extends Thread {
         }
         //System.out.println(move);
         return move;
+    }
+    
+    public void send(int x,int y) throws IOException{
+        ByteBuffer bf = ByteBuffer.allocate(200);
+        bf.putLong(0);
+        bf.putInt(my_id);
+        bf.putInt(x);
+        bf.putInt(y);
+        this.packet.setData(bf.array()); 
+        this.socket.send(this.packet);
     }
     
 }
