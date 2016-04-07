@@ -11,9 +11,12 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+import java.net.SocketException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Sheep;
 import protocol.UDPProtocol;
 
@@ -40,14 +43,30 @@ public class udptest extends Thread {
         this.packet = new DatagramPacket(buffer,buffer.length, receiverAddress, port);
     }
     
+    public void tryConnect(){
+             
+        try {
+            socket.setSoTimeout(10000);
+            socket.send(packet);           
+            socket.receive(packet);
+            
+        } catch (Exception ex) {
+            System.out.println("Timeout! send another one");
+            tryConnect();
+        } 
+    }
+    
     public void run(){
        
             try{
+                tryConnect();
+                /*
                 socket.setSoTimeout(10000);
                 socket.send(packet);
                 //System.out.println("Sent");
                 //receive ur stuff or u will never run.
                 socket.receive(packet);
+                */        
                 //System.out.println("Received!");
                 byte[] initial = packet.getData();
                 ByteBuffer bf = ByteBuffer.wrap(initial);
