@@ -37,8 +37,10 @@ public class UDPProtocol extends Thread{
     private final int port = 1108;
     private GUI ui;
     private static int my_id;
+    private static Timer timer;
     
     private UDPProtocol(GUI ui) throws IOException{
+        timer = new Timer();
         this.ui = ui;
         UDPProtocol.socket = new DatagramSocket();
         byte[] buffer = new byte[1024*1];
@@ -95,8 +97,13 @@ public class UDPProtocol extends Thread{
                 if(lastmil < mil){
                     lastmil = mil;
                     while((sheep_id = inReader.getInt()) != -1 ){
+                     
                         x = inReader.getInt();
                         y = inReader.getInt();
+                        if(sheep_id == UDPProtocol.my_id){
+                            UDPProtocol.timer.endTime(x+"", y+"");
+                        }
+                        
                         sheep_list.add(new Sheep(x,y,sheep_id));
                     }
                     ui.update(sheep_list);
@@ -117,10 +124,9 @@ public class UDPProtocol extends Thread{
         bf.putInt(UDPProtocol.my_id);
         bf.putInt(x);
         bf.putInt(y);
-        
         UDPProtocol.packet.setData(bf.array()); 
         UDPProtocol.socket.send(UDPProtocol.packet);
-        
+        UDPProtocol.timer.startTime(x+"", y+"", 10);
     }
     
 }

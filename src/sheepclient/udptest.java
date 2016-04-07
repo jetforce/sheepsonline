@@ -75,7 +75,8 @@ public class udptest extends Thread {
                     while((sheep_id = inReader.getInt()) != -1 ){
                         x = inReader.getInt();
                         y = inReader.getInt();
-                        System.out.println(mil+" "+x+" "+y);
+                        
+                        //System.out.println(mil+" "+x+" "+y);
                     }
                    
                     inReader.clear();
