@@ -44,8 +44,8 @@ public class SheepClient {
             //new Spawner(500).start();
             
             //udp
-            UDPProtocol.getInstance().start();
-            //new UDPSpawner(20).start();
+           // UDPProtocol.getInstance().start();
+            new UDPSpawner(20).start();
             //udptest up = new udptest();
             //up.start();
             

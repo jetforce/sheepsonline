@@ -45,14 +45,14 @@ public class udptest extends Thread {
             try{
                 socket.setSoTimeout(20000);
                 socket.send(packet);
-                System.out.println("Sent");
+                //System.out.println("Sent");
                 //receive ur stuff or u will never run.
                 socket.receive(packet);
-                System.out.println("Received!");
+                //System.out.println("Received!");
                 byte[] initial = packet.getData();
                 ByteBuffer bf = ByteBuffer.wrap(initial);
                 my_id = bf.getInt();
-                System.out.println("U received "+my_id);
+               // System.out.println("U received "+my_id);
             //Now listen to multicast port hehehe
             
              MulticastSocket Listen = new MulticastSocket(8889);
@@ -67,6 +67,11 @@ public class udptest extends Thread {
              
              
             while(true) {
+                int x_move = generatePosition();
+                int y_move = generatePosition();
+                
+                send(x_move, y_move);
+                sleep(500);
                 inPacket = new DatagramPacket(inBuf, inBuf.length);
                 Listen.receive(inPacket);
                 mil = inReader.getLong();
@@ -89,27 +94,21 @@ public class udptest extends Thread {
     
     }
     
-    public String generateMove() {
-        String move = "";
+    public int generatePosition() {
+        int move = 1;
         Random rand = new Random();
 
-        int num = rand.nextInt(5) + 1;
+        int num = rand.nextInt(3) + 1;
 
         switch (num) {
             case 1:
-                move = "0,0";
+                move = -1;
                 break;
             case 2:
-                move = "0,1";
+                move = 0;
                 break;
             case 3:
-                move = "1,0";
-                break;
-            case 4:
-                move = "-1,0";
-                break;
-            case 5:
-                move = "0,-1";
+                move = 1;
                 break;
         }
         //System.out.println(move);
