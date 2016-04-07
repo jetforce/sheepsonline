@@ -26,20 +26,25 @@ public class SheepClient {
     public static void main(String[] args){
         
  
-        /*try {
+        try {
+            /*try {
             GUI ui = new GUI();
             ui.setVisible(true);
             Protocol p = new Protocol(ui);
             p.start();
             
-        }catch (IOException ex) {
+            }catch (IOException ex) {
             Logger.getLogger(SheepClient.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-        
-        Protocol.getInstance().start();
-        
-        //comment out protocol then uncomment this to spawn dummy sheeps
-        new Spawner(500).start();
+            }*/
+            
+            //Protocol.getInstance().start();
+            udptest up = new udptest();
+            up.start();
+            //comment out protocol then uncomment this to spawn dummy sheeps
+            //new Spawner(500).start();
+        } catch (IOException ex) {
+            Logger.getLogger(SheepClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }    
     
 }

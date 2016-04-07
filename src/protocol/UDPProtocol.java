@@ -31,8 +31,8 @@ import model.Sheep;
 public class UDPProtocol extends Thread{
     
     private static UDPProtocol protocol = null;
-    private DatagramSocket socket;    
-    private DatagramPacket packet;
+    private static DatagramSocket socket;    
+    private static DatagramPacket packet;
     private final String address = "localhost";
     private final int port = 1108;
     private GUI ui;
@@ -40,13 +40,13 @@ public class UDPProtocol extends Thread{
     
     private UDPProtocol(GUI ui) throws IOException{
         this.ui = ui;
-        this.socket = new DatagramSocket();
+        UDPProtocol.socket = new DatagramSocket();
         byte[] buffer = new byte[1024*1];
         ByteBuffer bf = ByteBuffer.wrap(buffer);
         bf.putLong(-1);
         InetAddress receiverAddress = InetAddress.getByName(address);
-        this.packet = new DatagramPacket(buffer,buffer.length, receiverAddress, port);
-           
+        UDPProtocol.packet = new DatagramPacket(buffer,buffer.length, receiverAddress, port);
+        
     }
     
     public static UDPProtocol getInstance(){
@@ -66,19 +66,19 @@ public class UDPProtocol extends Thread{
         
         try {
                        
-            this.socket.setSoTimeout(20000);
-            this.socket.send(this.packet);
+            UDPProtocol.socket.setSoTimeout(20000);
+            UDPProtocol.socket.send(UDPProtocol.packet);
             //receive ur stuff or u will never run.
-            this.socket.receive(this.packet);
+            UDPProtocol.socket.receive(UDPProtocol.packet);
             
-            byte[] initial = this.packet.getData();
+            byte[] initial = UDPProtocol.packet.getData();
             ByteBuffer bf = ByteBuffer.wrap(initial);
             UDPProtocol.my_id = bf.getInt();
             //Now listen to multicast port hehehe
             
              MulticastSocket Listen = new MulticastSocket(8889);
-             InetAddress address = InetAddress.getByName("224.2.2.3");
-             Listen.joinGroup(address);
+             InetAddress iaddress = InetAddress.getByName("224.2.2.3");
+             Listen.joinGroup(iaddress);
              DatagramPacket inPacket;
              byte[] inBuf = new byte[1024*5];
              long lastmil=0, mil;
@@ -112,11 +112,15 @@ public class UDPProtocol extends Thread{
         }    
     }
     
-    private static void send(int x,int y){
+    private static void send(int x,int y) throws IOException{
         ByteBuffer bf = ByteBuffer.allocate(200);
         bf.putInt(UDPProtocol.my_id);
         bf.putInt(x);
         bf.putInt(y);
+        
+        UDPProtocol.packet.setData(bf.array()); 
+        UDPProtocol.socket.send(UDPProtocol.packet);
+        
     }
     
 }
