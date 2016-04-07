@@ -52,6 +52,7 @@ public class udptest extends Thread {
                 byte[] initial = packet.getData();
                 ByteBuffer bf = ByteBuffer.wrap(initial);
                 my_id = bf.getInt();
+                
                // System.out.println("U received "+my_id);
             //Now listen to multicast port hehehe
             
@@ -77,10 +78,11 @@ public class udptest extends Thread {
                 mil = inReader.getLong();
             
                     while((sheep_id = inReader.getInt()) != -1 ){
+                        
                         x = inReader.getInt();
                         y = inReader.getInt();
                         
-                        //System.out.println(mil+" "+x+" "+y);
+                        System.out.println(mil+" "+sheep_id + " " + x+" "+y);
                     }
                    
                     inReader.clear();
@@ -115,7 +117,7 @@ public class udptest extends Thread {
         return move;
     }
     
-    public void send(int x,int y) throws IOException{
+    public synchronized void send(int x,int y) throws IOException{
         ByteBuffer bf = ByteBuffer.allocate(200);
         bf.putLong(0);
         bf.putInt(my_id);
