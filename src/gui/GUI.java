@@ -16,6 +16,8 @@ import protocol.UDPProtocol;
 
 public class GUI extends javax.swing.JFrame {
     
+    private ArrayList<ArrayList<Sheep>> serverSheeps;
+    
     public GUI() {
         initComponents();
         
@@ -32,6 +34,8 @@ public class GUI extends javax.swing.JFrame {
                 panelMain.add(grid[i][j]);
             }
         }
+        
+        serverSheeps = new ArrayList<>();
         
         this.addKeyListener(new KeyListener() {
 
@@ -139,14 +143,29 @@ public class GUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void update(ArrayList<Sheep> sheeps){
-        for(int i = 0; i < rows * columns; i++){
-            grid[i/rows][i%columns].setText("");
+    public void update(int index, ArrayList<Sheep> sheeps){
+        if(index+1 > serverSheeps.size()){
+            serverSheeps.add(sheeps);
+            for(Sheep sheep : serverSheeps.get(index)){
+                grid[sheep.getX()][sheep.getY()].setText(String.valueOf(sheep.getId()));
+            }
+        } else{
+            for(Sheep sheep : serverSheeps.get(index)){
+                grid[sheep.getX()][sheep.getY()].setText("");
+            }
+            serverSheeps.set(index, sheeps);
+            for(Sheep sheep : serverSheeps.get(index)){
+                grid[sheep.getX()][sheep.getY()].setText(String.valueOf(sheep.getId()));
+            }
         }
         
-        for(Sheep sheep : sheeps){
-            grid[sheep.getX()][sheep.getY()].setText(String.valueOf(sheep.getId()));
-        }
+        //for(int i = 0; i < rows * columns; i++){
+        //    grid[i/rows][i%columns].setText("");
+        //}
+        
+        //for(Sheep sheep : sheeps){
+        //    grid[sheep.getX()][sheep.getY()].setText(String.valueOf(sheep.getId()));
+        //}
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
