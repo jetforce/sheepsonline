@@ -50,7 +50,6 @@ public class UDPProtocol extends Thread{
         bf.putLong(-1);
         InetAddress receiverAddress = InetAddress.getByName(address);
         UDPProtocol.packet = new DatagramPacket(buffer,buffer.length, receiverAddress, port);
-        
     }
     
     public static UDPProtocol getInstance(){
