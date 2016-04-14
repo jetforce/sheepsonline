@@ -79,8 +79,11 @@ public class UDPProtocol extends Thread {
         int resiv_id;
 
         try {
-
+            Server server_s = tryConnect();
             UDPProtocol.socket.setSoTimeout(20000);
+            UDPProtocol.packet.setAddress(server_s.getAddress());
+            UDPProtocol.packet.setPort(server_s.getPort());
+            //UDPProtocol.packet = new DatagramPacket(buffer, buffer.length, receiverAddress, port);
             UDPProtocol.socket.send(UDPProtocol.packet);
             //receive ur stuff or u will never run.
             UDPProtocol.socket.receive(UDPProtocol.packet);
