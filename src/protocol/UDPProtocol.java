@@ -76,6 +76,7 @@ public class UDPProtocol extends Thread {
 
     public void run() {
         ArrayList<Sheep> sheeps = new ArrayList<>();
+        int resiv_id;
 
         try {
 
@@ -103,6 +104,7 @@ public class UDPProtocol extends Thread {
                 inPacket = new DatagramPacket(inBuf, inBuf.length);
                 Listen.receive(inPacket);
                 mil = inReader.getLong();
+                resiv_id = inReader.getInt();
                 sheep_list = new ArrayList<>();
                 if (lastmil < mil) {
                     lastmil = mil;
@@ -116,7 +118,7 @@ public class UDPProtocol extends Thread {
 
                         sheep_list.add(new Sheep(x, y, sheep_id));
                     }
-                    ui.update(server.getId(), sheep_list);
+                    ui.update(resiv_id, sheep_list);
                 }
                 inReader.clear();
 
@@ -143,9 +145,9 @@ public class UDPProtocol extends Thread {
     public ArrayList<Server> getServers(){
         ArrayList<Server> servers = new ArrayList<>();
         
-        Server s = new Server(address, 1234);
+        Server s = new Server(address, 1108);
         servers.add(s);
-        s = new Server(address, 1235);
+        s = new Server(address, 1109);
         servers.add(s);
         s = new Server(address, 1236);
         servers.add(s);
@@ -162,7 +164,7 @@ public class UDPProtocol extends Thread {
         bb.putLong(-2);
         
         try {
-            connectSocket = new DatagramSocket(this.connect_port);
+            connectSocket = new DatagramSocket();
             
             for(Server s:serverList){
                 connectPacket = new DatagramPacket(send, send.length, s.getAddress(), s.getPort());

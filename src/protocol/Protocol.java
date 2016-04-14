@@ -77,7 +77,7 @@ public class Protocol extends Thread {
                
 
                 if(line.isEmpty()){
-                    this.ui.update(sheeps);
+                    //this.ui.update(sheeps);
                     sheeps = new ArrayList<>();//arren update UI here.
                 }else{
                     list = line.split(",");
