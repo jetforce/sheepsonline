@@ -146,6 +146,10 @@ public class GUI extends javax.swing.JFrame {
     public void update(int index, ArrayList<Sheep> sheeps){
         if(index+1 > serverSheeps.size()){
             //serverSheeps.add(sheeps);
+            //System.out.println(index + ": " + sheeps.size());
+            for(int i = serverSheeps.size(); i < index; i++){
+                serverSheeps.add(new ArrayList<Sheep>());
+            }
             serverSheeps.add(index, sheeps);
             for(Sheep sheep : serverSheeps.get(index)){
                 grid[sheep.getX()][sheep.getY()].setText(String.valueOf(sheep.getId()));
