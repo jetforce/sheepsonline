@@ -3,34 +3,44 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package model;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Arces
  */
 public class Server {
-    private String address;
+
+    private InetAddress address;
     private int port;
-    
-    public Server(String address, int port){
+    private int id;
+
+    public Server(InetAddress address, int port) {
         this.address = address;
         this.port = port;
+        this.id = 0;
+    }
+
+    public Server(String address, int port) {
+        try {
+            this.address = InetAddress.getByName(address);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.port = port;
+        this.id = 0;
     }
 
     /**
      * @return the address
      */
-    public String getAddress() {
+    public InetAddress getAddress() {
         return address;
-    }
-
-    /**
-     * @param address the address to set
-     */
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     /**
@@ -46,6 +56,26 @@ public class Server {
     public void setPort(int port) {
         this.port = port;
     }
-    
-    
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * @param address the address to set
+     */
+    public void setAddress(InetAddress address) {
+        this.address = address;
+    }
+
 }
