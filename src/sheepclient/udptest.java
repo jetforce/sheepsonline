@@ -48,6 +48,7 @@ public class udptest extends Thread {
         serverList = getServers();
         server = tryConnectServer();
         InetAddress receiverAddress = server.getAddress();
+        
         this.packet = new DatagramPacket(buffer, buffer.length, receiverAddress, server.getPort());
     }
 
@@ -99,10 +100,11 @@ public class udptest extends Thread {
 
                 send(x_move, y_move);
                 sleep(500);
+                /*
                 inPacket = new DatagramPacket(inBuf, inBuf.length);
                 Listen.receive(inPacket);
                 mil = inReader.getLong();
-
+                
                 while ((sheep_id = inReader.getInt()) != -1) {
 
                     x = inReader.getInt();
@@ -112,7 +114,7 @@ public class udptest extends Thread {
                 }
 
                 inReader.clear();
-
+*/
             }
         } catch (Exception e) {
             System.out.println("Error Waited a long time to connect unable to connect");
@@ -189,7 +191,7 @@ public class udptest extends Thread {
             int id = bb.getInt();
             connectServer = new Server(connectPacket.getAddress(), connectPacket.getPort());
             connectServer.setId(id);
-            System.out.println(id);
+            System.out.println("Here "+id);
 
         } catch (SocketException ex) {
             Logger.getLogger(UDPProtocol.class.getName()).log(Level.SEVERE, null, ex);
